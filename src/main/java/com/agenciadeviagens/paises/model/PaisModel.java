@@ -1,9 +1,13 @@
 package com.agenciadeviagens.paises.model;
 
+import com.agenciadeviagens.destinos.model.DestinoModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tb_paises")
@@ -21,5 +25,9 @@ public class PaisModel {
 
     @Column(nullable = false)
     private Continente continente;
+
+    @OneToMany(mappedBy = "pais")
+    @JsonIgnore
+    private List<DestinoModel> destino;
 
 }
