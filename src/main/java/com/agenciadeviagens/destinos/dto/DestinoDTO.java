@@ -1,5 +1,6 @@
 package com.agenciadeviagens.destinos.dto;
 
+import com.agenciadeviagens.paises.dto.PaisDTO;
 import com.agenciadeviagens.paises.model.PaisModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class DestinoDTO {
     private Long id;
     private String nome;
-    private PaisModel pais;
+    private PaisDTO pais;
 }

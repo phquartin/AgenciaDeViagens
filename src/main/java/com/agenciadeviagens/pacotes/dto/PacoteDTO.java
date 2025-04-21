@@ -1,5 +1,6 @@
 package com.agenciadeviagens.pacotes.dto;
 
+import com.agenciadeviagens.destinos.dto.DestinoDTO;
 import com.agenciadeviagens.destinos.model.DestinoModel;
 import com.agenciadeviagens.pacotes.model.PacoteType;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,7 @@ public class PacoteDTO {
     private String nome;
     private int dias;
     private double preco;
-    private List<DestinoModel> destinos;
+    private List<DestinoDTO> destinos;
     private PacoteType tipo;
     private String descricao;
 }
