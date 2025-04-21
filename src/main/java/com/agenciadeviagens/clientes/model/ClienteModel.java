@@ -1,9 +1,12 @@
 package com.agenciadeviagens.clientes.model;
 
+import com.agenciadeviagens.pedidos.model.PedidoModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tb_clientes")
@@ -31,5 +34,8 @@ public class ClienteModel {
 
     @Column(unique = true, nullable = false)
     private String documento;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<PedidoModel> pedidos;
 
 }

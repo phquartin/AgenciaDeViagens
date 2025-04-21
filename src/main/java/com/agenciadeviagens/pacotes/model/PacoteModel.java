@@ -1,6 +1,7 @@
 package com.agenciadeviagens.pacotes.model;
 
 import com.agenciadeviagens.destinos.model.DestinoModel;
+import com.agenciadeviagens.pedidos.model.PedidoModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,5 +42,8 @@ public class PacoteModel {
     private PacoteType tipo;
 
     private String descricao;
+
+    @OneToMany(mappedBy = "pacote")
+    private List<PedidoModel> pedidos;
 
 }
