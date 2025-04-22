@@ -11,6 +11,7 @@ public class ClienteMapper {
         ClienteModel clienteModel = new ClienteModel();
         clienteModel.setId(ClienteDTO.getId());
         clienteModel.setNome(ClienteDTO.getNome());
+        clienteModel.setTelefone(ClienteDTO.getTelefone());
         clienteModel.setEmail(ClienteDTO.getEmail());
         clienteModel.setTipo(ClienteDTO.getTipo());
         clienteModel.setDocumento(ClienteDTO.getDocumento());
@@ -20,6 +21,7 @@ public class ClienteMapper {
         ClienteDTO clienteDTO = new ClienteDTO();
         clienteDTO.setId(ClienteModel.getId());
         clienteDTO.setNome(ClienteModel.getNome());
+        clienteDTO.setTelefone(ClienteModel.getTelefone());
         clienteDTO.setEmail(ClienteModel.getEmail());
         clienteDTO.setTipo(ClienteModel.getTipo());
         clienteDTO.setDocumento(ClienteModel.getDocumento());
