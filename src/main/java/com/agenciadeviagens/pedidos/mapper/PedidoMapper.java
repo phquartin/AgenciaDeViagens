@@ -1,25 +1,60 @@
 package com.agenciadeviagens.pedidos.mapper;
 
+import com.agenciadeviagens.clientes.mapper.ClienteMapper;
+import com.agenciadeviagens.pacotes.mapper.PacoteMapper;
 import com.agenciadeviagens.pedidos.dto.PedidoDTO;
 import com.agenciadeviagens.pedidos.model.PedidoModel;
+import com.agenciadeviagens.servicos.mapper.ServicosMapper;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
 
 @Component
 public class PedidoMapper {
+
+    private final ClienteMapper clienteMapper;
+    private final PacoteMapper pacoteMapper;
+    private final ServicosMapper servicosMapper;
+
+    public PedidoMapper(ClienteMapper clienteMapper, PacoteMapper pacoteMapper, ServicosMapper servicosMapper) {
+        this.clienteMapper = clienteMapper;
+        this.pacoteMapper = pacoteMapper;
+        this.servicosMapper = servicosMapper;
+    }
+
     public PedidoModel map(PedidoDTO pedidoDTO) {
         PedidoModel pedido = new PedidoModel();
         pedido.setId(pedidoDTO.getId());
-        pedido.setCliente(pedidoDTO.getCliente());
-        pedido.setPacote(pedidoDTO.getPacote());
-        pedido.setServicos(pedidoDTO.getServicos());
+
+        // Convertendo DTO -> Model usando os outros mappers
+        pedido.setCliente(clienteMapper.map(pedidoDTO.getCliente()));
+        pedido.setPacote(pacoteMapper.map(pedidoDTO.getPacote()));
+        pedido.setServicos(
+                pedidoDTO.getServicos() != null ?
+                        pedidoDTO.getServicos().stream()
+                                .map(servicosMapper::map)
+                                .collect(Collectors.toList())
+                        : null
+        );
+
         return pedido;
     }
+
     public PedidoDTO map(PedidoModel pedidoModel) {
         PedidoDTO pedidoDTO = new PedidoDTO();
         pedidoDTO.setId(pedidoModel.getId());
-        pedidoDTO.setCliente(pedidoModel.getCliente());
-        pedidoDTO.setPacote(pedidoModel.getPacote());
-        pedidoDTO.setServicos(pedidoModel.getServicos());
+
+        // Convertendo Model -> DTO usando os outros mappers
+        pedidoDTO.setCliente(clienteMapper.map(pedidoModel.getCliente()));
+        pedidoDTO.setPacote(pacoteMapper.map(pedidoModel.getPacote()));
+        pedidoDTO.setServicos(
+                pedidoModel.getServicos() != null ?
+                        pedidoModel.getServicos().stream()
+                                .map(servicosMapper::map)
+                                .collect(Collectors.toList())
+                        : null
+        );
+
         return pedidoDTO;
     }
 }
