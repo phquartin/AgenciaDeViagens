@@ -2,6 +2,7 @@ package com.agenciadeviagens.clientes.service;
 
 import com.agenciadeviagens.clientes.dto.ClienteDTO;
 import com.agenciadeviagens.clientes.mapper.ClienteMapper;
+import com.agenciadeviagens.clientes.model.ClienteModel;
 import com.agenciadeviagens.clientes.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,20 @@ public class ClienteService {
         return clienteRepository.findAll().stream()
                 .map(clienteMapper::map)
                 .collect(Collectors.toList());
+    }
+
+    public ClienteDTO buscarPorId(Long id) {
+        ClienteModel cliente = clienteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Cliente nao encontrado"));
+        return clienteMapper.map(cliente);
+    }
+
+    public void update(ClienteDTO clienteDTO) {
+        // TODO: PATH
+    }
+
+    public void excluir(Long id) {
+        buscarPorId(id);
+        clienteRepository.deleteById(id);
     }
 
 }
