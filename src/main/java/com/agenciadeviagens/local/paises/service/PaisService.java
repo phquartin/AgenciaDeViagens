@@ -1,5 +1,6 @@
 package com.agenciadeviagens.local.paises.service;
 
+import com.agenciadeviagens.global.exceptions.RecursoNaoEncontrado;
 import com.agenciadeviagens.global.interfaces.InterfaceService;
 import com.agenciadeviagens.local.paises.dto.PaisDTO;
 import com.agenciadeviagens.local.paises.mapper.PaisMapper;
@@ -10,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PaisService implements InterfaceService<PaisDTO> {
@@ -25,9 +27,8 @@ public class PaisService implements InterfaceService<PaisDTO> {
     @Override
     public void salvar(PaisDTO paisDTO) {
 
-        String nome = paisDTO.getNome();
-        String nomeCapitalized = PaisValidation.capitalizeTodasPalavras(nome);
-        paisDTO.setNome(nome);
+        String nomeCapitalized = PaisValidation.capitalizeTodasPalavras(paisDTO.getNome());
+        paisDTO.setNome(nomeCapitalized);
 
         try {
             paisRepository.save(paisMapper.map(paisDTO));
@@ -40,21 +41,30 @@ public class PaisService implements InterfaceService<PaisDTO> {
 
     @Override
     public List<PaisDTO> listarTodos() {
-        return List.of();
+        return paisRepository.findAll()
+                .stream()
+                .map(paisMapper::map)
+                .collect(Collectors.toList());
     }
 
     @Override
     public PaisDTO buscarPorId(Long id) {
-        return null;
+        return paisMapper.map(paisRepository.findById(id).orElseThrow(() -> new RecursoNaoEncontrado("Pais nao encontrado")));
     }
 
     @Override
-    public void update(Long id, PaisDTO paisDTO) {
+    public void update(Long id, PaisDTO paisNovo) {
+        PaisDTO paisExistente = buscarPorId(id);
+
+        if(!paisNovo.getNome().isBlank()) paisExistente.setNome(paisNovo.getNome());
+
+        salvar(paisExistente);
 
     }
 
     @Override
     public void excluir(Long id) {
-
+        buscarPorId(id);
+        paisRepository.deleteById(id);
     }
 }
