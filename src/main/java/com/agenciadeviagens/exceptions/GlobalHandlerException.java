@@ -13,6 +13,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @ControllerAdvice
 public class GlobalHandlerException {
 
@@ -44,10 +46,20 @@ public class GlobalHandlerException {
     }
 
     @ExceptionHandler(ClienteException.class)
-    public ModelAndView handleClienteInvalidoException(ClienteException ex) {
-        ModelAndView mv = new ModelAndView("clientes/formulario");
+    public ModelAndView handleClienteInvalidoException(ClienteException ex, HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView();
+        String url = request.getRequestURI();
+        if (url.contains("/atualizar/")) {
+            ClienteDTO cliente = (ClienteDTO) request.getAttribute("cliente");
+            mv.setViewName("clientes/editar");
+            mv.addObject("erro", ex.getMessage());
+            mv.addObject("cliente", cliente);
+        }
+        else {
+            mv.setViewName("clientes/formulario");
+            mv.addObject("cliente", new ClienteDTO());
+        }
         mv.addObject("erro", ex.getMessage());
-        mv.addObject("cliente", new ClienteDTO());
         return mv;
     }
 }

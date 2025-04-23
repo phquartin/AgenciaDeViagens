@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+  <title>Editar Cliente</title>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #f4f4f4;
+    }
+
+    .form-container {
+      background: white;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.7rem;
+      margin-top: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      margin-top: 2rem;
+      padding: 0.8rem 2rem;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<div class="form-container">
+  <h2>Editar Cliente</h2>
+  <div th:if="${erro}" class="alert-error">
+    <p th:text="${erro}"></p>
+  </div>
+  <form th:action="@{'/cliente/ui/atualizar/' + ${cliente.id}}" th:object="${cliente}" method="post">
+    <input type="hidden" name="_method" value="patch" />
+    <input type="hidden" th:field="*{id}"/>
+
+    <label for="nome">Nome</label>
+    <input type="text" id="nome" th:field="*{nome}"/>
+
+    <label for="email">E-mail</label>
+    <input type="email" id="email" th:field="*{email}"/>
+
+    <label for="telefone">Telefone</label>
+    <input type="text" id="telefone" th:field="*{telefone}"/>
+
+    <label for="tipo">Tipo</label>
+    <input type="text" id="tipo" th:field="*{tipo}" readonly="readonly"/>
+
+    <label for="documento">Documento</label>
+    <input type="text" id="documento" th:field="*{documento}"/>
+
+    <button type="submit">Atualizar</button>
+  </form>
+</div>
+</body>
+</html>

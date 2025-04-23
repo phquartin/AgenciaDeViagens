@@ -2,6 +2,9 @@ package com.agenciadeviagens.clientes.controller;
 
 import com.agenciadeviagens.clientes.dto.ClienteDTO;
 import com.agenciadeviagens.clientes.service.ClienteService;
+import com.agenciadeviagens.clientes.validation.ClienteException;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -44,6 +47,23 @@ public class ClienteControllerUi {
         ModelAndView mv = new ModelAndView("clientes/visualizar");
         mv.addObject("cliente", clienteService.buscarPorId(id));
         return mv;
+    }
+
+    @GetMapping("/editar/{id}")
+    public ModelAndView editar(@PathVariable("id") Long id){
+        ModelAndView mv = new ModelAndView("clientes/editar");
+        mv.addObject("cliente", clienteService.buscarPorId(id));
+        return mv;
+    }
+    @PostMapping("/atualizar/{id}")
+    public String atualizar(@ModelAttribute("cliente") ClienteDTO cliente, HttpServletRequest request) {
+        try {
+            clienteService.update(cliente.getId(), cliente);
+            return "redirect:/cliente/ui/visualizar/" + cliente.getId();
+        } catch (ClienteException e) {
+            request.setAttribute("cliente", cliente);
+            throw e;
+        }
     }
 
     @GetMapping("/deletar/{id}")

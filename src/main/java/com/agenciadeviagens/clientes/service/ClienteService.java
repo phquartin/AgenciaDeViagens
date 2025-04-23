@@ -45,8 +45,18 @@ public class ClienteService {
         return clienteMapper.map(cliente);
     }
 
-    public void update(ClienteDTO clienteDTO) {
-        // TODO: PATH
+    public void update(Long id, ClienteDTO clienteNovo) {
+        ClienteDTO clienteExistente = buscarPorId(id);
+        System.out.println(clienteExistente);
+        System.out.println(clienteNovo);
+
+        // Verificar campos que devem ser atualizados
+        if (!clienteNovo.getNome().isBlank()) clienteExistente.setNome(clienteNovo.getNome());
+        if (!clienteNovo.getEmail().isBlank()) clienteExistente.setEmail(clienteNovo.getEmail());
+        if (!clienteNovo.getTelefone().isBlank()) clienteExistente.setTelefone(clienteNovo.getTelefone());
+        if (!clienteNovo.getDocumento().isBlank()) clienteExistente.setDocumento(clienteNovo.getDocumento());
+
+        salvar(clienteExistente); // Ja possui Validations, por isso a reutilização.
     }
 
     public void excluir(Long id) {
