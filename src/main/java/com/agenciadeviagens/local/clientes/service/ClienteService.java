@@ -1,5 +1,6 @@
 package com.agenciadeviagens.local.clientes.service;
 
+import com.agenciadeviagens.global.interfaces.InterfaceService;
 import com.agenciadeviagens.local.clientes.dto.ClienteDTO;
 import com.agenciadeviagens.local.clientes.mapper.ClienteMapper;
 import com.agenciadeviagens.local.clientes.model.ClienteModel;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ClienteService {
+public class ClienteService implements InterfaceService<ClienteDTO> {
 
     private final ClienteRepository clienteRepository;
     private final ClienteMapper clienteMapper;
