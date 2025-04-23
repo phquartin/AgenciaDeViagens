@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Visualizar Cliente</title>
+  <link rel="stylesheet" th:href="@{/css/visualizar-style.css}">
+</head>
+<body>
+<div class="container">
+  <h1>Detalhes do Cliente</h1>
+
+  <div class="card">
+    <p><strong>ID:</strong> <span th:text="${cliente.id}">1</span></p>
+    <p><strong>Nome:</strong> <span th:text="${cliente.nome}">João da Silva</span></p>
+    <p><strong>Email:</strong> <span th:text="${cliente.email}">joao@email.com</span></p>
+    <p><strong>Telefone:</strong> <span th:text="${cliente.telefone}">+55 (61) 99999-0000</span></p>
+    <p><strong>Tipo:</strong> <span th:text="${cliente.tipo}">NACIONAL</span></p>
+    <p><strong>Documento:</strong> <span th:text="${cliente.documento}">123.456.789-00</span></p>
+  </div>
+
+  <a href="/cliente/ui/todos" class="botao-voltar">Voltar para lista</a>
+</div>
+</body>
+</html>

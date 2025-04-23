@@ -39,6 +39,13 @@ public class ClienteControllerUi {
         return mv;
     }
 
+    @GetMapping("/visualizar/{id}")
+    public ModelAndView visualizar(@PathVariable("id") Long id){
+        ModelAndView mv = new ModelAndView("clientes/visualizar");
+        mv.addObject("cliente", clienteService.buscarPorId(id));
+        return mv;
+    }
+
     @GetMapping("/deletar/{id}")
     public String deletar(@PathVariable Long id) {
         clienteService.excluir(id);
