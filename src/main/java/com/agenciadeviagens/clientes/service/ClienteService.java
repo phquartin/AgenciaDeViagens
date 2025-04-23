@@ -2,9 +2,14 @@ package com.agenciadeviagens.clientes.service;
 
 import com.agenciadeviagens.clientes.dto.ClienteDTO;
 import com.agenciadeviagens.clientes.mapper.ClienteMapper;
+import com.agenciadeviagens.clientes.model.ClientType;
 import com.agenciadeviagens.clientes.model.ClienteModel;
 import com.agenciadeviagens.clientes.repository.ClienteRepository;
+import com.agenciadeviagens.clientes.validation.ClienteException;
+import com.agenciadeviagens.clientes.validation.ClienteValidation;
 import com.agenciadeviagens.exceptions.RecursoNaoEncontrado;
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,12 +25,13 @@ public class ClienteService {
         this.clienteMapper = clienteMapper;
     }
 
-    public void salvar(ClienteDTO clienteDTO) {
-        //TODO: Exceptions
-
-
-        clienteRepository.save(clienteMapper.map(clienteDTO));
-
+    public void salvar(ClienteDTO cliente) {
+        ClienteValidation.validarCampos(cliente);
+        try {
+            clienteRepository.save(clienteMapper.map(cliente));
+        }catch (DataIntegrityViolationException e) {
+            throw new ClienteException("Ja existe um cliente com este email, telefone ou documento");
+        }
     }
 
     public List<ClienteDTO> listarTodos(){
