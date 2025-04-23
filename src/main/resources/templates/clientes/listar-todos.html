@@ -30,9 +30,9 @@
       <td th:text="${cliente.tipo}"></td>
       <td th:text="${cliente.documento}"></td>
       <td>
-        <a th:href="@{/clientes/ui/{id}/editar(id=${cliente.id})}" class="btn-edit">Editar</a>
-        <a th:href="@{/clientes/ui/{id}/visualizar(id=${cliente.id})}" class="btn-view">Visualizar</a>
-        <a th:href="@{/clientes/ui/{id}/deletar(id=${cliente.id})}" class="btn-delete">Deletar</a>
+        <a th:href="@{/cliente/ui/{id}/editar(id=${cliente.id})}" class="btn-edit">Editar</a>
+        <a th:href="@{/cliente/ui/{id}/visualizar(id=${cliente.id})}" class="btn-view">Visualizar</a>
+        <a th:href="@{/cliente/ui/deletar/{id}(id=${cliente.id})}" class="btn-delete">Deletar</a>
       </td>
     </tr>
     </tbody>

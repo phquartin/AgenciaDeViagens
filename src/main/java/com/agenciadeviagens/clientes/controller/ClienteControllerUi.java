@@ -3,10 +3,7 @@ package com.agenciadeviagens.clientes.controller;
 import com.agenciadeviagens.clientes.dto.ClienteDTO;
 import com.agenciadeviagens.clientes.service.ClienteService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -34,14 +31,18 @@ public class ClienteControllerUi {
         return "redirect:/cliente/ui/todos";
     }
 
-
-
     @GetMapping("/todos")
     public ModelAndView listarTodos(){
         ModelAndView mv = new ModelAndView("clientes/listar-todos");
         List<ClienteDTO> todosClientes = clienteService.listarTodos();
         mv.addObject("todosClientes", todosClientes);
         return mv;
+    }
+
+    @GetMapping("/deletar/{id}")
+    public String deletar(@PathVariable Long id) {
+        clienteService.excluir(id);
+        return "redirect:/cliente/ui/todos";
     }
 
 }
