@@ -20,12 +20,11 @@ public class ClienteExceptionHandler {
             mv.setViewName("clientes/editar");
             mv.addObject("erro", ex.getMessage());
             mv.addObject("cliente", cliente);
+            return mv;
         }
-        else {
-            mv.setViewName("clientes/formulario");
-            mv.addObject("cliente", new ClienteDTO());
-        }
+        mv.setViewName("clientes/formulario");
         mv.addObject("erro", ex.getMessage());
+        mv.addObject("cliente", new ClienteDTO());
         return mv;
     }
 }
