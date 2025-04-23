@@ -1,5 +1,6 @@
 package com.agenciadeviagens.local.clientes.controller;
 
+import com.agenciadeviagens.global.interfaces.InterfaceController;
 import com.agenciadeviagens.local.clientes.dto.ClienteDTO;
 import com.agenciadeviagens.local.clientes.service.ClienteService;
 import com.agenciadeviagens.local.clientes.validation.ClienteException;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/cliente/ui")
-public class ClienteControllerUi {
+public class ClienteControllerUi implements InterfaceController<ClienteDTO> {
 
     private final ClienteService clienteService;
     public ClienteControllerUi(ClienteService clienteService) {
@@ -27,9 +28,8 @@ public class ClienteControllerUi {
         return mv;
     }
     @PostMapping("/salvar")
-    public String salvar(@ModelAttribute("cliente") ClienteDTO cliente, RedirectAttributes redirectAttributes) {
+    public String salvar(@ModelAttribute("cliente") ClienteDTO cliente) {
         clienteService.salvar(cliente);
-        redirectAttributes.addFlashAttribute("mensagem", "Cliente cadastrado com sucesso.");
         return "redirect:/cliente/ui/todos";
     }
 
