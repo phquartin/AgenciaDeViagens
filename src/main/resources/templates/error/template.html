@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${erro.statusCode + ' - Erro'}">Erro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: #f5f7fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .error-container {
+            background-color: white;
+            padding: 2rem 3rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .status-code {
+            font-size: 4rem;
+            font-weight: 600;
+            color: #e63946;
+            margin-bottom: 0.5rem;
+        }
+
+        .message {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .timestamp, .path {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .back-button {
+            margin-top: 1.5rem;
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #457b9d;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #1d3557;
+        }
+    </style>
+</head>
+<body>
+<div class="error-container">
+    <div class="status-code" th:text="${erro.statusCode}">404</div>
+    <div class="message" th:text="${erro.mensagem}">Mensagem do erro</div>
+    <div class="timestamp">
+        <strong>Data/Hora:</strong>
+        <span th:text="${#temporals.format(erro.timestamp, 'dd/MM/yyyy HH:mm:ss')}">00/00/0000 00:00:00</span>
+    </div>
+    <div class="path">
+        <strong>URL:</strong>
+        <span th:text="${erro.path}">/rota/errada</span>
+    </div>
+    <a href="/" class="back-button">Voltar para o início</a>
+</div>
+</body>
+</html>
