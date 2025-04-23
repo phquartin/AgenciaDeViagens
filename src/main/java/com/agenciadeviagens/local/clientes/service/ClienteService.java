@@ -30,6 +30,8 @@ public class ClienteService implements InterfaceService<ClienteDTO> {
             clienteRepository.save(clienteMapper.map(cliente));
         }catch (DataIntegrityViolationException e) {
             throw new ClienteException("Ja existe um cliente com este email, telefone ou documento");
+        } catch (Exception e) {
+            throw new ClienteException(e.getMessage());
         }
     }
 
