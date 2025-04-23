@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.time.LocalDateTime;
 
@@ -36,4 +37,19 @@ public class GlobalHandlerException {
         mv.addObject("erro", erro);
         return mv;
     }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ModelAndView handleNoResourceFoundException(HttpServletRequest request) {
+        ErrorResponse erro = new ErrorResponse(
+                "Not Found",
+                404,
+                LocalDateTime.now(),
+                request.getRequestURI()
+        );
+
+        ModelAndView mv = new ModelAndView("error/template");
+        mv.addObject("erro", erro);
+        return mv;
+    }
+
 }
