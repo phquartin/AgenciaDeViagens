@@ -14,7 +14,7 @@ public class StringToPacoteDTOConverter implements Converter<String, PacoteDTO> 
 
     @Override
     public PacoteDTO convert(String source) {
-        if (source == null || source.isEmpty()) {
+        if (source.isEmpty()) {
             return null;
         }
 

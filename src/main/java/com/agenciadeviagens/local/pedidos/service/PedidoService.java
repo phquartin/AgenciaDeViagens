@@ -1,5 +1,6 @@
 package com.agenciadeviagens.local.pedidos.service;
 
+import com.agenciadeviagens.global.exceptions.RecursoNaoEncontrado;
 import com.agenciadeviagens.global.interfaces.InterfaceService;
 import com.agenciadeviagens.local.clientes.dto.ClienteDTO;
 import com.agenciadeviagens.local.clientes.mapper.ClienteMapper;
@@ -24,6 +25,7 @@ public class PedidoService implements InterfaceService<PedidoDTO> {
 
     @Override
     public void salvar(PedidoDTO entidade) {
+        if (entidade.getCliente() == null || entidade.getPacote() == null) throw new IllegalArgumentException("Nao vai salvar pedido sem cliente ou pacote");
         pedidoRepository.save(pedidoMapper.map(entidade));
     }
 
@@ -36,7 +38,8 @@ public class PedidoService implements InterfaceService<PedidoDTO> {
 
     @Override
     public PedidoDTO buscarPorId(Long id) {
-        return null;
+        PedidoModel pedidoExiste = pedidoRepository.findById(id).orElseThrow(() -> new RecursoNaoEncontrado("Pedido nao existe"));
+        return pedidoMapper.map(pedidoExiste);
     }
 
     @Override

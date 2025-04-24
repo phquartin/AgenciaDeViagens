@@ -10,11 +10,9 @@ import com.agenciadeviagens.local.pedidos.service.PedidoService;
 import com.agenciadeviagens.local.servicos.dto.ServicosDTO;
 import com.agenciadeviagens.local.servicos.service.ServicosService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -74,8 +72,13 @@ public class PedidoController implements InterfaceController<PedidoDTO> {
     }
 
     @Override
-    public ModelAndView visualizar(Long id) {
-        return null;
+    @GetMapping("/visualizar/{id}")
+    public ModelAndView visualizar(@PathVariable Long id) {
+        ModelAndView mv = new ModelAndView();
+        PedidoDTO pedidoDTO = pedidoService.buscarPorId(id);
+        mv.setViewName("pedidos/visualizar");
+        mv.addObject("pedido", pedidoDTO);
+        return mv;
     }
 
     @Override
