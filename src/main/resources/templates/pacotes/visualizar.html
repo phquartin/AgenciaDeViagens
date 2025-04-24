@@ -1,12 +1,28 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/visualizar-style.css" th:href="@{/css/visualizar-style.css}">
-  <title>Document</title>
+  <title>Visualizar Pacote</title>
+  <link rel="stylesheet" th:href="@{/css/visualizar-style.css}">
 </head>
 <body>
+<div class="container">
+  <h1>Detalhes do Pacote</h1>
 
+  <div class="card">
+    <p><strong>ID:</strong> <span th:text="${pacote.id}"></span></p>
+    <p><strong>Nome:</strong> <span th:text="${pacote.nome}"></span></p>
+    <p><strong>Destinos:</strong></p>
+    <ul>
+      <li th:each="destino : ${pacote.destinos}" th:text="${destino.nome}"></li>
+    </ul>
+    <p><strong>Dias:</strong> <span th:text="${pacote.dias}"></span></p>
+    <p><strong>Preço:</strong> R$ <span th:text="${#numbers.formatDecimal(pacote.preco, 1, 'POINT', 2, 'COMMA')}"></span></p>
+    <p><strong>Tipo:</strong> <span th:text="${pacote.tipo}"></span></p>
+    <p><strong>Descrição:</strong> <span th:text="${pacote.descricao}"></span></p>
+  </div>
+
+  <a href="/pacote/ui/todos" class="botao-voltar">Voltar para lista</a>
+</div>
 </body>
 </html>

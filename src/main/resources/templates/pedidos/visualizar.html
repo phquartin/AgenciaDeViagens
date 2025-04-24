@@ -1,12 +1,26 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/visualizar-style.css" th:href="@{/css/visualizar-style.css}">
-  <title>Document</title>
+  <title>Visualizar Pedido</title>
+  <link rel="stylesheet" th:href="@{/css/visualizar-style.css}">
 </head>
 <body>
+<div class="container">
+  <h1>Detalhes do Pedido</h1>
 
+  <div class="card">
+    <p><strong>ID:</strong> <span th:text="${pedido.id}"></span></p>
+    <p><strong>Cliente:</strong> <span th:text="${pedido.cliente.nome}"></span></p>
+    <p><strong>Pacote:</strong> <span th:text="${pedido.pacote.nome}"></span></p>
+    <p><strong>Serviços:</strong>
+    <ul>
+      <li th:each="servico : ${pedido.servicos}" th:text="${servico.nome}"></li>
+    </ul>
+    </p>
+  </div>
+
+  <a href="/pedido/ui/todos" class="botao-voltar">Voltar para lista</a>
+</div>
 </body>
 </html>

@@ -1,12 +1,44 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/table-style.css" th:href="@{/css/table-style.css}">
-  <title>Document</title>
+  <title>Lista de Pedidos</title>
+  <link rel="stylesheet" th:href="@{/css/table-style.css}">
 </head>
 <body>
+<div class="container">
+  <a class="btn btn-primary" th:href="@{/}">Voltar</a>
+  <h1>Lista de Pedidos</h1>
+  <a th:href="@{/pedido/ui/criar}" class="btn-create">Criar Novo Pedido</a>
 
+  <table class="client-table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Cliente</th>
+      <th>Pacote</th>
+      <th>Serviços</th>
+      <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pedido : ${todosPedidos}">
+      <td th:text="${pedido.id}"></td>
+      <td th:text="${pedido.cliente.nome}"></td>
+      <td th:text="${pedido.pacote.nome}"></td>
+      <td>
+        <ul>
+          <li th:each="servico : ${pedido.servicos}" th:text="${servico.nome}"></li>
+        </ul>
+      </td>
+      <td>
+        <a th:href="@{/pedido/ui/editar/{id}(id=${pedido.id})}" class="btn-edit">Editar</a>
+        <a th:href="@{/pedido/ui/visualizar/{id}(id=${pedido.id})}" class="btn-view">Visualizar</a>
+        <a th:href="@{/pedido/ui/deletar/{id}(id=${pedido.id})}" class="btn-delete">Deletar</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 </body>
 </html>

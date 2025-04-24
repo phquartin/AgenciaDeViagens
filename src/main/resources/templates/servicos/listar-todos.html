@@ -1,12 +1,38 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/table-style.css" th:href="@{/css/table-style.css}">
-  <title>Document</title>
+  <title>Lista de Serviços</title>
+  <link rel="stylesheet" th:href="@{/css/table-style.css}">
 </head>
 <body>
+<div class="container">
+  <a class="btn btn-primary" th:href="@{/}">Voltar</a>
+  <h1>Lista de Serviços</h1>
+  <a th:href="@{/servico/ui/criar}" class="btn-create">Criar Novo Serviço</a>
 
+  <table class="client-table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Preço</th>
+      <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="servico : ${todosServicos}">
+      <td th:text="${servico.id}"></td>
+      <td th:text="${servico.nome}"></td>
+      <td th:text="${servico.preco}"></td>
+      <td>
+        <a th:href="@{/servico/ui/editar/{id}(id=${servico.id})}" class="btn-edit">Editar</a>
+        <a th:href="@{/servico/ui/visualizar/{id}(id=${servico.id})}" class="btn-view">Visualizar</a>
+        <a th:href="@{/servico/ui/deletar/{id}(id=${servico.id})}" class="btn-delete">Deletar</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 </body>
 </html>
