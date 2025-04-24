@@ -35,16 +35,16 @@ public class PacoteControllerUi implements InterfaceController<PacoteDTO> {
         mv.addObject("todosDestinos", destinos);
         return mv;
     }
-    @Override
+
     @PostMapping("/salvar")
-    public String salvar(@ModelAttribute PacoteDTO entidade) {
+    public String salvar(@ModelAttribute PacoteDTO entidade, HttpServletRequest request) {
         try{
             pacoteService.salvar(entidade);
             return "redirect:/pacote/ui/visualizar" + entidade.getId();
         } catch (PacoteException e){
-
+            request.setAttribute("pacote", entidade);
+            throw e;
         }
-        return "redirect:/pacote/ui/visualizar" + entidade.getId();
     }
 
     @Override
@@ -70,12 +70,24 @@ public class PacoteControllerUi implements InterfaceController<PacoteDTO> {
     }
 
     @Override
-    public ModelAndView editar(Long id) {
-        return null;
+    @GetMapping("/editar/{id}")
+    public ModelAndView editar(@PathVariable Long id) {
+        ModelAndView mv = new ModelAndView();
+        PacoteDTO pacote = pacoteService.buscarPorId(id);
+        mv.setViewName("pacotes/editar");
+        mv.addObject("pacote", pacote);
+        return mv;
     }
     @Override
-    public String atualizar(PacoteDTO entidade, HttpServletRequest request) {
-        return "";
+    @PostMapping("/atualizar/{id}")
+    public String atualizar(@ModelAttribute PacoteDTO entidade, HttpServletRequest request) {
+        try{
+            pacoteService.update(entidade.getId(), entidade);
+            return "redirect:/pacote/ui/visualizar/" + entidade.getId();
+        } catch (PacoteException e){
+            request.setAttribute("pacote", entidade);
+            throw e;
+        }
     }
 
     @Override
@@ -84,4 +96,10 @@ public class PacoteControllerUi implements InterfaceController<PacoteDTO> {
         pacoteService.excluir(id);
         return "redirect:/pacote/ui/todos";
     }
+
+    @Override
+    public String salvar(PacoteDTO entidade) {
+        return "";
+    }
+
 }

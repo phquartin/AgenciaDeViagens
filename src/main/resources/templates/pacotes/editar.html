@@ -8,7 +8,9 @@
 <body>
 <div class="container">
     <h1>Editar Pacote</h1>
-
+    <div th:if="${erro}" class="alert-error">
+        <p th:text="${erro}"></p>
+    </div>
     <form th:action="@{'/pacote/ui/atualizar/' + ${pacote.id}}" th:object="${pacote}" method="post" class="form-card">
         <input type="hidden" name="_method" value="patch"/>
         <input type="hidden" th:field="*{id}"/>
@@ -20,10 +22,11 @@
 
         <div class="form-group">
             <label for="destinos">Destinos:</label>
-            <select id="destinos" th:field="*{destinos}" multiple size="5">
-                <option th:each="destino : ${todosDestinos}" th:value="${destino}" th:text="${destino.nome}"></option>
+            <select id="destinos" multiple size="5" disabled>
+                <option th:each="destino : ${pacote.destinos}" th:value="${destino.id}" th:text="${destino.nome}"></option>
             </select>
         </div>
+
 
         <div class="form-group">
             <label for="dias">Dias:</label>
@@ -36,9 +39,12 @@
         </div>
 
         <div class="form-group">
-            <label for="tipo">Tipo:</label>
+            <label for="tipo">Tipo de Pacote:</label>
             <select id="tipo" th:field="*{tipo}" required>
-                <option th:each="tipo : ${tiposPacote}" th:value="${tipo}" th:text="${tipo}"></option>
+                <option value="LUXO">Luxo</option>
+                <option value="CULTURAL">Cultural</option>
+                <option value="FAMILIA">Familia</option>
+                <option value="AVENTURA">Aventura</option>
             </select>
         </div>
 

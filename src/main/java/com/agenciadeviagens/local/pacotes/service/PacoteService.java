@@ -7,6 +7,8 @@ import com.agenciadeviagens.local.pacotes.mapper.PacoteMapper;
 import com.agenciadeviagens.local.pacotes.model.PacoteModel;
 import com.agenciadeviagens.local.pacotes.repository.PacoteRepository;
 import com.agenciadeviagens.local.pacotes.validation.PacoteException;
+import com.agenciadeviagens.local.pacotes.validation.PacoteValidation;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +25,7 @@ public class PacoteService implements InterfaceService<PacoteDTO> {
 
     @Override
     public void salvar(PacoteDTO entidade) {
+        PacoteValidation.validarCampos(entidade);
         pacoteRepository.save(pacoteMapper.map(entidade));
     }
 
@@ -38,12 +41,23 @@ public class PacoteService implements InterfaceService<PacoteDTO> {
 
     @Override
     public void update(Long id, PacoteDTO entidade) {
+        PacoteDTO pacoteExistente = buscarPorId(id);
 
+        if(!entidade.getDescricao().isBlank()) pacoteExistente.setDescricao(entidade.getDescricao());
+        if(entidade.getPreco() != 0) pacoteExistente.setPreco(entidade.getPreco());
+        if (entidade.getDias() != 0) pacoteExistente.setDias(entidade.getDias());
+        if (!entidade.getNome().isBlank()) pacoteExistente.setNome(entidade.getNome());
+
+        salvar(pacoteExistente);
     }
 
     @Override
     public void excluir(Long id) {
         buscarPorId(id);
-        pacoteRepository.deleteById(id);
+        try {
+            pacoteRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e){
+            throw new DataIntegrityViolationException("Pedidos dependem desse Pacote!");
+        }
     }
 }
