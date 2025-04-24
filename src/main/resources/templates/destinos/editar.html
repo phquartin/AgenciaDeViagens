@@ -1,22 +1,36 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 <head>
+    <title>Editar Destino</title>
     <meta charset="UTF-8">
-    <title>Visualizar Destino</title>
-    <link rel="stylesheet" th:href="@{/css/visualizar-style.css}">
+    <link rel="stylesheet" href="/css/form-style.css" th:href="@{/css/form-style.css}">
 </head>
 <body>
 <div class="container">
-    <h1>Detalhes do Destino</h1>
+    <h1>Editar Destino</h1>
 
-    <div class="card">
-        <p><strong>ID:</strong> <span th:text="${destino.id}">1</span></p>
-        <p><strong>Nome:</strong> <span th:text="${destino.nome}">Rio de Janeiro</span></p>
-        <p><strong>País:</strong> <span th:text="${destino.pais.nome}">Brasil</span></p>
+    <div th:if="${erro}" class="alert-error">
+        <p th:text="${erro}"></p>
     </div>
 
-    <a href="/destino/ui/todos" class="botao-voltar">Voltar para lista</a>
+    <form th:action="@{'/destino/ui/atualizar/' + ${destino.id}}" th:object="${destino}" method="post" class="form-card">
+        <input type="hidden" name="_method" value="patch"/>
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" th:field="*{nome}" placeholder="Nome do destino"/>
+        </div>
+
+        <div class="form-group">
+            <label for="pais">País</label>
+            <input type="text" id="pais" th:field="*{pais.nome}" readonly>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn">Atualizar</button>
+        </div>
+    </form>
 </div>
 </body>
 </html>
-
