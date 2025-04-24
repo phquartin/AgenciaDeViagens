@@ -24,12 +24,14 @@ public class PedidoService implements InterfaceService<PedidoDTO> {
 
     @Override
     public void salvar(PedidoDTO entidade) {
-
+        pedidoRepository.save(pedidoMapper.map(entidade));
     }
 
     @Override
     public List<PedidoDTO> listarTodos() {
-        return List.of();
+        return pedidoRepository.findAll().stream()
+                .map(pedidoMapper::map)
+                .collect(Collectors.toList());
     }
 
     @Override

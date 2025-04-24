@@ -26,7 +26,7 @@
 
     <div class="form-group">
       <label for="servicos">Serviços:</label>
-      <select id="servicos" th:field="*{servicos}" multiple="multiple" required>
+      <select id="servicos" th:field="*{servicos}" multiple="multiple">
         <option th:each="serv : ${servicos}" th:value="${serv.id}" th:text="${serv.nome}"></option>
       </select>
     </div>
