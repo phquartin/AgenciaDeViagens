@@ -1,12 +1,36 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/form-style.css" th:href="@{/css/form-style.css}">
-  <title>Document</title>
+  <title>Criar Destino</title>
+  <link rel="stylesheet" th:href="@{/css/form-style.css}">
 </head>
 <body>
+<div class="container">
+  <h1>Criar Novo Destino</h1>
+  <div th:if="${erro}" class="alert-error">
+    <p th:text="${erro}"></p>
+  </div>
+  <form th:action="@{/destino/ui/salvar}" th:object="${destino}" method="post" class="form-card">
+    <div class="form-group">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" th:field="*{nome}" placeholder="Nome do destino" required>
+      <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error-msg"></span>
+    </div>
 
+    <div class="form-group">
+      <label for="pais">País:</label>
+      <select id="pais" th:field="*{pais}" required>
+        <option value="">Selecione um país...</option>
+        <option th:each="pais : ${todosPaises}" th:value="${pais}" th:text="${pais.nome}"></option>
+      </select>
+      <span th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}" class="error-msg"></span>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn">Cadastrar</button>
+    </div>
+  </form>
+</div>
 </body>
 </html>

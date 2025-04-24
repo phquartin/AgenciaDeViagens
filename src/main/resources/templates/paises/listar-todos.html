@@ -1,12 +1,38 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/table-style.css" th:href="@{/css/table-style.css}">
-  <title>Document</title>
+  <title>Lista de Países</title>
+  <link rel="stylesheet" th:href="@{/css/table-style.css}">
 </head>
 <body>
+<div class="container">
+  <a class="btn btn-primary" th:href="@{/}">Voltar</a>
+  <h1>Lista de Países</h1>
+  <a th:href="@{/pais/ui/criar}" class="btn-create">Criar Novo País</a>
 
+  <table class="client-table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Continente</th>
+      <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pais : ${todosPaises}">
+      <td th:text="${pais.id}"></td>
+      <td th:text="${pais.nome}"></td>
+      <td th:text="${pais.continente}"></td>
+      <td>
+        <a th:href="@{/pais/ui/editar/{id}(id=${pais.id})}" class="btn-edit">Editar</a>
+        <a th:href="@{/pais/ui/visualizar/{id}(id=${pais.id})}" class="btn-view">Visualizar</a>
+        <a th:href="@{/pais/ui/deletar/{id}(id=${pais.id})}" class="btn-delete">Deletar</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 </body>
 </html>

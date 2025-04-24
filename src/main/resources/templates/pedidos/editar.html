@@ -1,12 +1,43 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/form-style.css" th:href="@{/css/form-style.css}">
-    <title>Document</title>
+    <title>Editar Pedido</title>
+    <link rel="stylesheet" th:href="@{/css/form-style.css}">
 </head>
 <body>
+<div class="container">
+    <h1>Editar Pedido</h1>
 
+    <form th:action="@{'/pedido/ui/atualizar/' + ${pedido.id}}" th:object="${pedido}" method="post" class="form-card">
+        <input type="hidden" name="_method" value="patch"/>
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="form-group">
+            <label for="cliente">Cliente:</label>
+            <select id="cliente" th:field="*{cliente}" required>
+                <option th:each="cli : ${clientes}" th:value="${cli.id}" th:text="${cli.nome}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="pacote">Pacote:</label>
+            <select id="pacote" th:field="*{pacote}" required>
+                <option th:each="pac : ${pacotes}" th:value="${pac.id}" th:text="${pac.nome}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="servicos">Serviços:</label>
+            <select id="servicos" th:field="*{servicos}" multiple="multiple" required>
+                <option th:each="serv : ${servicos}" th:value="${serv.id}" th:text="${serv.nome}"></option>
+            </select>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn">Atualizar</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>
