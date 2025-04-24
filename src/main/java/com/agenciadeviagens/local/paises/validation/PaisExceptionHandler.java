@@ -1,6 +1,5 @@
 package com.agenciadeviagens.local.paises.validation;
 
-import com.agenciadeviagens.local.clientes.dto.ClienteDTO;
 import com.agenciadeviagens.local.paises.dto.PaisDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.Ordered;
@@ -12,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class PaisExceptionHandler {
-
+    @Order(Ordered.HIGHEST_PRECEDENCE)
     @ExceptionHandler(PaisException.class)
     public ModelAndView handlePaisException(PaisException ex, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
@@ -22,10 +21,11 @@ public class PaisExceptionHandler {
             mv.setViewName("paises/editar");
             mv.addObject("erro", ex.getMessage());
             mv.addObject("pais", pais);
+            return mv;
         }
         mv.setViewName("paises/formulario");
-        mv.addObject("paises", new PaisDTO());
         mv.addObject("erro", ex.getMessage());
+        mv.addObject("pais", new PaisDTO());
         return mv;
     }
 }

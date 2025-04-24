@@ -9,6 +9,10 @@
 <div class="container">
     <h1>Editar País</h1>
 
+    <div th:if="${erro}" class="alert-error">
+        <p th:text="${erro}"></p>
+    </div>
+
     <form th:action="@{'/pais/ui/atualizar/' + ${pais.id}}" th:object="${pais}" method="post" class="form-card">
         <input type="hidden" name="_method" value="patch"/>
         <input type="hidden" th:field="*{id}"/>

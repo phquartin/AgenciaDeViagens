@@ -27,8 +27,10 @@ public class PaisService implements InterfaceService<PaisDTO> {
     @Override
     public void salvar(PaisDTO paisDTO) {
 
-        String nomeCapitalized = PaisValidation.capitalizeTodasPalavras(paisDTO.getNome());
-        paisDTO.setNome(nomeCapitalized);
+        PaisValidation.validarCampos(paisDTO);
+
+        String capitalized = PaisValidation.capitalizeTodasPalavras(paisDTO.getNome());
+        paisDTO.setNome(capitalized);
 
         try {
             paisRepository.save(paisMapper.map(paisDTO));
