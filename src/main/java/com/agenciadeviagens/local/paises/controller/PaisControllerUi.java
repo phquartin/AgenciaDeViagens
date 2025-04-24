@@ -57,8 +57,8 @@ public class PaisControllerUi implements InterfaceController<PaisDTO> {
         return mv;
     }
     @Override
-    @PostMapping("/atualizar")
-    public String atualizar(PaisDTO entidade, HttpServletRequest request) {
+    @PostMapping("/atualizar/{id}")
+    public String atualizar(@ModelAttribute PaisDTO entidade, HttpServletRequest request) {
         try {
             paisService.update(entidade.getId(), entidade);
             return "redirect:/pais/ui/visualizar/" + entidade.getId();

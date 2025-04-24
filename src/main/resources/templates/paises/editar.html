@@ -20,9 +20,7 @@
 
         <div class="form-group">
             <label for="continente">Continente:</label>
-            <select id="continente" th:field="*{continente}" required>
-                <option th:each="cont : ${continentes}" th:value="${cont}" th:text="${cont}"></option>
-            </select>
+            <input type="text" id="continente" th:field="*{continente}" readonly>
         </div>
 
         <div class="form-actions">
