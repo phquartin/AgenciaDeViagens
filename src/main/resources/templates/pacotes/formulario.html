@@ -18,7 +18,7 @@
     <div class="form-group">
       <label for="destinos">Destinos:</label>
       <select id="destinos" th:field="*{destinos}" multiple size="5" required>
-        <option th:each="destino : ${todosDestinos}" th:value="${destino}" th:text="${destino.nome}"></option>
+        <option th:each="destino : ${todosDestinos}" th:value="${destino.id}" th:text="${destino.nome}"></option>
       </select>
     </div>
 
@@ -35,8 +35,10 @@
     <div class="form-group">
       <label for="tipo">Tipo de Pacote:</label>
       <select id="tipo" th:field="*{tipo}" required>
-        <option value="">Selecione...</option>
-        <option th:each="tipo : ${tiposPacote}" th:value="${tipo}" th:text="${tipo}"></option>
+          <option value="LUXO">Luxo</option>
+          <option value="CULTURAL">Cultural</option>
+          <option value="FAMILIA">Familia</option>
+          <option value="AVENTURA">Aventura</option>
       </select>
     </div>
 

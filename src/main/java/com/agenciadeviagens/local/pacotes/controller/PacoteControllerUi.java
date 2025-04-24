@@ -1,34 +1,50 @@
 package com.agenciadeviagens.local.pacotes.controller;
 
 import com.agenciadeviagens.global.interfaces.InterfaceController;
-import com.agenciadeviagens.global.interfaces.InterfaceService;
+import com.agenciadeviagens.local.destinos.dto.DestinoDTO;
+import com.agenciadeviagens.local.destinos.service.DestinoService;
 import com.agenciadeviagens.local.pacotes.dto.PacoteDTO;
 import com.agenciadeviagens.local.pacotes.service.PacoteService;
+import com.agenciadeviagens.local.pacotes.validation.PacoteException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
 @Controller
 @RequestMapping("/pacote/ui")
-public class PacoteController implements InterfaceController<PacoteDTO> {
+public class PacoteControllerUi implements InterfaceController<PacoteDTO> {
 
     private final PacoteService pacoteService;
-    public PacoteController(PacoteService pacoteService) {
+    private final DestinoService destinoService;
+    public PacoteControllerUi(PacoteService pacoteService, DestinoService destinoService) {
         this.pacoteService = pacoteService;
+        this.destinoService = destinoService;
     }
 
     @Override
+    @GetMapping("/criar")
     public ModelAndView criar() {
-        return null;
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("pacotes/formulario");
+        mv.addObject("pacote", new PacoteDTO());
+        List<DestinoDTO> destinos = destinoService.listarTodos();
+        mv.addObject("todosDestinos", destinos);
+        return mv;
     }
     @Override
-    public String salvar(PacoteDTO entidade) {
-        return "";
+    @PostMapping("/salvar")
+    public String salvar(@ModelAttribute PacoteDTO entidade) {
+        try{
+            pacoteService.salvar(entidade);
+            return "redirect:/pacote/ui";
+        } catch (PacoteException e){
+
+        }
+        return "redirect:/pacote/ui/visualizar" + entidade.getId();
     }
 
     @Override

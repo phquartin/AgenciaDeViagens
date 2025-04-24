@@ -22,7 +22,7 @@ public class PacoteService implements InterfaceService<PacoteDTO> {
 
     @Override
     public void salvar(PacoteDTO entidade) {
-
+        pacoteRepository.save(pacoteMapper.map(entidade));
     }
 
     public List<PacoteDTO> listarTodos() {

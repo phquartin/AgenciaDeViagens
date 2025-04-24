@@ -37,11 +37,6 @@ public class DestinoControllerUi implements InterfaceController<DestinoDTO> {
         return mv;
     }
 
-    @Override
-    public String salvar(DestinoDTO entidade) {
-        return "";
-    }
-
     @PostMapping("/salvar")
     public String salvar(@ModelAttribute("destino") DestinoDTO destino, HttpServletRequest request) {
         try {
@@ -91,5 +86,10 @@ public class DestinoControllerUi implements InterfaceController<DestinoDTO> {
     public String deletar(@PathVariable Long id) {
         destinoService.excluir(id);
         return "redirect:/destino/ui/todos";
+    }
+
+    @Override
+    public String salvar(DestinoDTO entidade) {
+        return "";
     }
 }
