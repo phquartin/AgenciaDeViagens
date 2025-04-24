@@ -67,8 +67,9 @@ public class PedidoController implements InterfaceController<PedidoDTO> {
     public ModelAndView listarTodos() {
         ModelAndView mv = new ModelAndView();
         List<PedidoDTO> pedidoDTOS = pedidoService.listarTodos();
+        System.out.println(pedidoDTOS);
         mv.setViewName("pedidos/listar-todos");
-        mv.addObject("pedidoDTOS", pedidoDTOS);
+        mv.addObject("todosPedidos", pedidoDTOS);
         return mv;
     }
 
