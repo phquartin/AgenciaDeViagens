@@ -65,6 +65,10 @@ public class PaisService implements InterfaceService<PaisDTO> {
     @Override
     public void excluir(Long id) {
         buscarPorId(id);
-        paisRepository.deleteById(id);
+        try {
+            paisRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e){
+            throw new DataIntegrityViolationException("Destinos dependem desse Pais!");
+        }
     }
 }

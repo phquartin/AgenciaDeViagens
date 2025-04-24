@@ -24,6 +24,7 @@ public class PaisModel {
     private String nome;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Continente continente;
 
     @OneToMany(mappedBy = "pais")

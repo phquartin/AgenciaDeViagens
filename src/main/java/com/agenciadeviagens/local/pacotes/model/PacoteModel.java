@@ -39,6 +39,7 @@ public class PacoteModel {
     private double preco;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private PacoteType tipo;
 
     private String descricao;

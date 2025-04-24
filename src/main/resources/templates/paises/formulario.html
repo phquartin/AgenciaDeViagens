@@ -8,7 +8,9 @@
 <body>
 <div class="container">
   <h1>Criar Novo País</h1>
-
+  <div th:if="${erro}" class="alert-error">
+    <p th:text="${erro}"></p>
+  </div>
   <form th:action="@{/pais/ui/salvar}" th:object="${pais}" method="post" class="form-card">
     <div class="form-group">
       <label for="nome">Nome:</label>
@@ -18,8 +20,12 @@
     <div class="form-group">
       <label for="continente">Continente:</label>
       <select id="continente" th:field="*{continente}" required>
-        <option value="">Selecione...</option>
-        <option th:each="cont : ${continentes}" th:value="${cont}" th:text="${cont}"></option>
+        <option value="ASIA">Asia</option>
+        <option value="AFRICA">Africa</option>
+        <option value="AMERICA_DO_SUL">America do Sul</option>
+        <option value="AMERICA_DO_NORTE">America do Norte</option>
+        <option value="AMERICA_CENTRAL">America Central</option>
+        <option value="EUROPA">Europa</option>
       </select>
     </div>
 

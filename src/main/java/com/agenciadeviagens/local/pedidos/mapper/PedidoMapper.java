@@ -5,6 +5,7 @@ import com.agenciadeviagens.local.pacotes.mapper.PacoteMapper;
 import com.agenciadeviagens.local.pedidos.dto.PedidoDTO;
 import com.agenciadeviagens.local.pedidos.model.PedidoModel;
 import com.agenciadeviagens.local.servicos.mapper.ServicosMapper;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
@@ -16,7 +17,7 @@ public class PedidoMapper {
     private final PacoteMapper pacoteMapper;
     private final ServicosMapper servicosMapper;
 
-    public PedidoMapper(ClienteMapper clienteMapper, PacoteMapper pacoteMapper, ServicosMapper servicosMapper) {
+    public PedidoMapper(@Lazy ClienteMapper clienteMapper, @Lazy PacoteMapper pacoteMapper, @Lazy ServicosMapper servicosMapper) {
         this.clienteMapper = clienteMapper;
         this.pacoteMapper = pacoteMapper;
         this.servicosMapper = servicosMapper;

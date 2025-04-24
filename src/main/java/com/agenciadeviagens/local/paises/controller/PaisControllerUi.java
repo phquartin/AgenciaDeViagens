@@ -69,7 +69,7 @@ public class PaisControllerUi implements InterfaceController<PaisDTO> {
     }
 
     @Override
-    @DeleteMapping("/deletar/{id}")
+    @GetMapping("/deletar/{id}")
     public String deletar(@PathVariable Long id) {
         paisService.excluir(id);
         return "redirect:/pais/ui/todos";

@@ -17,6 +17,21 @@
     <p><strong>Tipo:</strong> <span th:text="${cliente.tipo}">NACIONAL</span></p>
     <p><strong>Documento:</strong> <span th:text="${cliente.documento}">123.456.789-00</span></p>
   </div>
+  <div class="card">
+    <h2>Pedidos</h2>
+    <div th:if="${cliente.pedidos != null and !cliente.pedidos.isEmpty()}">
+      <ul>
+        <li th:each="pedido : ${cliente.pedidos}">
+          Pedido ID: <span th:text="${pedido.id}"></span>,
+          Pacote: <span th:text="${pedido.pacote.nome}">Nome do pacote</span>
+        </li>
+      </ul>
+    </div>
+    <div th:if="${cliente.pedidos == null or cliente.pedidos.isEmpty()}">
+      <p>Esse cliente ainda não possui pedidos.</p>
+    </div>
+  </div>
+
 
   <a href="/cliente/ui/todos" class="botao-voltar">Voltar para lista</a>
 </div>

@@ -1,6 +1,7 @@
 package com.agenciadeviagens.global.exceptions;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,6 +14,19 @@ public class GlobalHandlerException {
 
     @ExceptionHandler(Exception.class)
     public ModelAndView handleException(Exception ex, HttpServletRequest request) {
+        ErrorResponse erro = new ErrorResponse(
+                ex.getMessage(),
+                500,
+                LocalDateTime.now(),
+                request.getRequestURI()
+        );
+        ModelAndView mv = new ModelAndView("error/template");
+        mv.addObject("erro", erro);
+        return mv;
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ModelAndView handleDataIntegrityViolationException(DataIntegrityViolationException ex, HttpServletRequest request) {
         ErrorResponse erro = new ErrorResponse(
                 ex.getMessage(),
                 500,
