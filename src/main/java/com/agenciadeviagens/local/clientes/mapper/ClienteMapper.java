@@ -2,7 +2,9 @@ package com.agenciadeviagens.local.clientes.mapper;
 
 import com.agenciadeviagens.local.clientes.dto.ClienteDTO;
 import com.agenciadeviagens.local.clientes.model.ClienteModel;
+import com.agenciadeviagens.local.pedidos.dto.PedidoClienteDTO;
 import com.agenciadeviagens.local.pedidos.dto.PedidoDTO;
+import com.agenciadeviagens.local.pedidos.mapper.PedidoClienteMapper;
 import com.agenciadeviagens.local.pedidos.mapper.PedidoMapper;
 import com.agenciadeviagens.local.pedidos.model.PedidoModel;
 import org.springframework.stereotype.Component;
@@ -13,8 +15,8 @@ import java.util.stream.Collectors;
 @Component
 public class ClienteMapper {
 
-    private final PedidoMapper pedidoMapper;
-    public ClienteMapper(PedidoMapper pedidoMapper) {
+    private final PedidoClienteMapper pedidoMapper;
+    public ClienteMapper(PedidoClienteMapper pedidoMapper) {
         this.pedidoMapper = pedidoMapper;
     }
 
@@ -41,7 +43,7 @@ public class ClienteMapper {
         clienteDTO.setTipo(ClienteModel.getTipo());
         clienteDTO.setDocumento(ClienteModel.getDocumento());
 
-        List<PedidoDTO> pedidos = ClienteModel.getPedidos().stream().map(pedidoMapper::map).collect(Collectors.toList());
+        List<PedidoClienteDTO> pedidos = ClienteModel.getPedidos().stream().map(pedidoMapper::map).collect(Collectors.toList());
         clienteDTO.setPedidos(pedidos);
 
         return clienteDTO;
