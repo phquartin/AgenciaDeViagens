@@ -25,9 +25,9 @@ public class DestinoService implements InterfaceService<DestinoDTO> {
 
     @Override
     public void salvar(DestinoDTO destinoDTO) {
+        DestinoValidation.validarCampos(destinoDTO);
         String capitalized = DestinoValidation.capitalizeTodasPalavras(destinoDTO.getNome());
         destinoDTO.setNome(capitalized);
-        if (destinoDTO.getPais() == null) throw new DestinoException("Destino sem um Pais");
         try{
             destinoRepository.save(destinoMapper.map(destinoDTO));
         } catch(DataIntegrityViolationException e){

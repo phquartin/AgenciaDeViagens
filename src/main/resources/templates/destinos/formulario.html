@@ -15,16 +15,14 @@
     <div class="form-group">
       <label for="nome">Nome:</label>
       <input type="text" id="nome" th:field="*{nome}" placeholder="Nome do destino" required>
-      <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error-msg"></span>
     </div>
 
     <div class="form-group">
       <label for="pais">País:</label>
-      <select id="pais" th:field="*{pais}" required>
-        <option value="">Selecione um país...</option>
-        <option th:each="pais : ${todosPaises}" th:value="${pais}" th:text="${pais.nome}"></option>
+      <select id="pais" th:field="*{pais.id}" required>
+      <option value="">Selecione um país...</option>
+        <option th:each="pais : ${todosPaises}" th:value="${pais.id}" th:text="${pais.nome}"></option>
       </select>
-      <span th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}" class="error-msg"></span>
     </div>
 
     <div class="form-actions">

@@ -1,12 +1,21 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/visualizar-style.css" th:href="@{/css/visualizar-style.css}">
-  <title>Document</title>
+  <title>Visualizar Destino</title>
+  <link rel="stylesheet" th:href="@{/css/visualizar-style.css}">
 </head>
 <body>
+<div class="container">
+  <h1>Detalhes do Destino</h1>
 
+  <div class="card">
+    <p><strong>ID:</strong> <span th:text="${destino.id}">1</span></p>
+    <p><strong>Nome:</strong> <span th:text="${destino.nome}">Rio de Janeiro</span></p>
+    <p><strong>País:</strong> <span th:text="${destino.pais.nome}">Brasil</span></p>
+  </div>
+
+  <a href="/destino/ui/todos" class="botao-voltar">Voltar para lista</a>
+</div>
 </body>
 </html>
