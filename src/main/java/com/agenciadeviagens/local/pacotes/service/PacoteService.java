@@ -1,5 +1,6 @@
 package com.agenciadeviagens.local.pacotes.service;
 
+import com.agenciadeviagens.global.exceptions.RecursoNaoEncontrado;
 import com.agenciadeviagens.global.interfaces.InterfaceService;
 import com.agenciadeviagens.local.pacotes.dto.PacoteDTO;
 import com.agenciadeviagens.local.pacotes.mapper.PacoteMapper;
@@ -31,7 +32,7 @@ public class PacoteService implements InterfaceService<PacoteDTO> {
                 .toList();
     }
     public PacoteDTO buscarPorId(Long id) {
-        PacoteModel pacoteEncontrado = pacoteRepository.findById(id).orElseThrow(() -> new PacoteException("Pacote Nao Encontrado"));
+        PacoteModel pacoteEncontrado = pacoteRepository.findById(id).orElseThrow(() -> new RecursoNaoEncontrado("Pacote Nao Encontrado"));
         return pacoteMapper.map(pacoteEncontrado);
     }
 
@@ -42,6 +43,7 @@ public class PacoteService implements InterfaceService<PacoteDTO> {
 
     @Override
     public void excluir(Long id) {
-
+        buscarPorId(id);
+        pacoteRepository.deleteById(id);
     }
 }

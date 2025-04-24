@@ -40,7 +40,7 @@ public class PacoteControllerUi implements InterfaceController<PacoteDTO> {
     public String salvar(@ModelAttribute PacoteDTO entidade) {
         try{
             pacoteService.salvar(entidade);
-            return "redirect:/pacote/ui";
+            return "redirect:/pacote/ui/visualizar" + entidade.getId();
         } catch (PacoteException e){
 
         }
@@ -73,14 +73,15 @@ public class PacoteControllerUi implements InterfaceController<PacoteDTO> {
     public ModelAndView editar(Long id) {
         return null;
     }
-
     @Override
     public String atualizar(PacoteDTO entidade, HttpServletRequest request) {
         return "";
     }
 
     @Override
-    public String deletar(Long id) {
-        return "";
+    @GetMapping("/deletar/{id}")
+    public String deletar(@PathVariable Long id) {
+        pacoteService.excluir(id);
+        return "redirect:/pacote/ui/todos";
     }
 }
