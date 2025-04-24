@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -20,5 +21,5 @@ public class PacoteDTO {
     private List<DestinoDTO> destinos;
     private PacoteType tipo;
     private String descricao;
-    List<PedidoPacoteDTO> pedidos;
+    List<PedidoPacoteDTO> pedidos = new ArrayList<>();
 }

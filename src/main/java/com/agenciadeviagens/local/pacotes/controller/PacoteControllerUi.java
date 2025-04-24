@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -40,7 +39,7 @@ public class PacoteControllerUi implements InterfaceController<PacoteDTO> {
     public String salvar(@ModelAttribute PacoteDTO entidade, HttpServletRequest request) {
         try{
             pacoteService.salvar(entidade);
-            return "redirect:/pacote/ui/visualizar" + entidade.getId();
+            return "redirect:/pacote/ui/todos";
         } catch (PacoteException e){
             request.setAttribute("pacote", entidade);
             throw e;
