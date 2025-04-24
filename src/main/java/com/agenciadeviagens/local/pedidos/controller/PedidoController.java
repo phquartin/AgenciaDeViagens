@@ -56,7 +56,7 @@ public class PedidoController implements InterfaceController<PedidoDTO> {
     public String salvar(@ModelAttribute PedidoDTO entidade) {
         try {
             pedidoService.salvar(entidade);
-            return "redirect:/pacote/ui/todos";
+            return "redirect:/pedido/ui/todos";
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
