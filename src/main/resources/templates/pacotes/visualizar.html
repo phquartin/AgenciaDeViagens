@@ -22,6 +22,21 @@
     <p><strong>Descrição:</strong> <span th:text="${pacote.descricao}"></span></p>
   </div>
 
+  <div class="card">
+    <h2>Pedidos</h2>
+    <div th:if="${pacote.pedidos != null and !pacote.pedidos.isEmpty()}">
+      <ul>
+        <li th:each="pedido : ${pacote.pedidos}">
+          Pedido ID: <span th:text="${pedido.id}"></span>,
+          Cliente: <span th:text="${pedido.cliente.nome}">Nome do Cliente</span>
+        </li>
+      </ul>
+    </div>
+    <div th:if="${pacote.pedidos == null or pacote.pedidos.isEmpty()}">
+      <p>Esse pacote ainda não possui pedidos.</p>
+    </div>
+  </div>
+
   <a href="/pacote/ui/todos" class="botao-voltar">Voltar para lista</a>
 </div>
 </body>
