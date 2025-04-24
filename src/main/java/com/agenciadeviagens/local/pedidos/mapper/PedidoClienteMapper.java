@@ -2,10 +2,8 @@ package com.agenciadeviagens.local.pedidos.mapper;
 
 import com.agenciadeviagens.local.pacotes.mapper.PacoteMapper;
 import com.agenciadeviagens.local.pedidos.dto.PedidoClienteDTO;
-import com.agenciadeviagens.local.pedidos.dto.PedidoDTO;
 import com.agenciadeviagens.local.pedidos.model.PedidoModel;
 import com.agenciadeviagens.local.servicos.mapper.ServicosMapper;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;

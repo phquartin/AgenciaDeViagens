@@ -1,6 +1,5 @@
 package com.agenciadeviagens.local.pedidos.dto;
 
-import com.agenciadeviagens.local.clientes.dto.ClienteDTO;
 import com.agenciadeviagens.local.pacotes.dto.PacoteDTO;
 import com.agenciadeviagens.local.servicos.dto.ServicosDTO;
 import lombok.AllArgsConstructor;

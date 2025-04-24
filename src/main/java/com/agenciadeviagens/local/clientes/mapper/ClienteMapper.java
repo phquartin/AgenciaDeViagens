@@ -3,9 +3,7 @@ package com.agenciadeviagens.local.clientes.mapper;
 import com.agenciadeviagens.local.clientes.dto.ClienteDTO;
 import com.agenciadeviagens.local.clientes.model.ClienteModel;
 import com.agenciadeviagens.local.pedidos.dto.PedidoClienteDTO;
-import com.agenciadeviagens.local.pedidos.dto.PedidoDTO;
 import com.agenciadeviagens.local.pedidos.mapper.PedidoClienteMapper;
-import com.agenciadeviagens.local.pedidos.mapper.PedidoMapper;
 import com.agenciadeviagens.local.pedidos.model.PedidoModel;
 import org.springframework.stereotype.Component;
 
