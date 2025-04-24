@@ -1,8 +1,6 @@
 package com.agenciadeviagens.local.pedidos.mapper;
 
 import com.agenciadeviagens.local.clientes.mapper.ClienteMapper;
-import com.agenciadeviagens.local.pacotes.mapper.PacoteMapper;
-import com.agenciadeviagens.local.pedidos.dto.PedidoDTO;
 import com.agenciadeviagens.local.pedidos.dto.PedidoPacoteDTO;
 import com.agenciadeviagens.local.pedidos.model.PedidoModel;
 import com.agenciadeviagens.local.servicos.mapper.ServicosMapper;
@@ -17,7 +15,7 @@ public class PedidoPacoteMapper {
     private final ClienteMapper clienteMapper;
     private final ServicosMapper servicosMapper;
 
-    public PedidoPacoteMapper(ClienteMapper clienteMapper, ServicosMapper servicosMapper) {
+    public PedidoPacoteMapper(@Lazy ClienteMapper clienteMapper, ServicosMapper servicosMapper) {
         this.clienteMapper = clienteMapper;
         this.servicosMapper = servicosMapper;
     }
@@ -26,8 +24,9 @@ public class PedidoPacoteMapper {
         PedidoModel pedido = new PedidoModel();
         pedido.setId(pedidoDTO.getId());
 
-        // Convertendo DTO -> Model usando os outros mappers
-        pedido.setCliente(clienteMapper.map(pedidoDTO.getCliente()));
+        // Aqui você pode criar mapSemPedidos() para ClienteDTO -> ClienteModel se necessário
+        pedido.setCliente(clienteMapper.map(pedidoDTO.getCliente())); // cuidado com o loop, se quiser evitar, crie um mapSemPedidos() reverso também
+
         pedido.setServicos(
                 pedidoDTO.getServicos() != null ?
                         pedidoDTO.getServicos().stream()
@@ -39,12 +38,13 @@ public class PedidoPacoteMapper {
         return pedido;
     }
 
+
     public PedidoPacoteDTO map(PedidoModel pedidoModel) {
         PedidoPacoteDTO pedidoDTO = new PedidoPacoteDTO();
         pedidoDTO.setId(pedidoModel.getId());
 
-        // Convertendo Model -> DTO usando os outros mappers
-        pedidoDTO.setCliente(clienteMapper.map(pedidoModel.getCliente()));
+        pedidoDTO.setCliente(clienteMapper.mapSemPedidos(pedidoModel.getCliente()));
+
         pedidoDTO.setServicos(
                 pedidoModel.getServicos() != null ?
                         pedidoModel.getServicos().stream()
@@ -55,4 +55,5 @@ public class PedidoPacoteMapper {
 
         return pedidoDTO;
     }
+
 }

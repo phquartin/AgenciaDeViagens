@@ -46,5 +46,16 @@ public class ClienteMapper {
 
         return clienteDTO;
     }
+    public ClienteDTO mapSemPedidos(ClienteModel clienteModel) {
+        ClienteDTO clienteDTO = new ClienteDTO();
+        clienteDTO.setId(clienteModel.getId());
+        clienteDTO.setNome(clienteModel.getNome());
+        clienteDTO.setTelefone(clienteModel.getTelefone());
+        clienteDTO.setEmail(clienteModel.getEmail());
+        clienteDTO.setTipo(clienteModel.getTipo());
+        clienteDTO.setDocumento(clienteModel.getDocumento());
+        return clienteDTO;
+    }
+
 
 }

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -18,5 +19,5 @@ public class ClienteDTO {
     private String email;
     private ClientType tipo;
     private String documento;
-    private List<PedidoClienteDTO> pedidos;
+    private List<PedidoClienteDTO> pedidos = new ArrayList<>();
 }
