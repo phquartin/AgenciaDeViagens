@@ -1,5 +1,6 @@
 package com.agenciadeviagens.local.pacotes.service;
 
+import com.agenciadeviagens.global.interfaces.InterfaceService;
 import com.agenciadeviagens.local.pacotes.dto.PacoteDTO;
 import com.agenciadeviagens.local.pacotes.mapper.PacoteMapper;
 import com.agenciadeviagens.local.pacotes.model.PacoteModel;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PacoteService {
+public class PacoteService implements InterfaceService<PacoteDTO> {
 
     private final PacoteRepository pacoteRepository;
     private final PacoteMapper pacoteMapper;
@@ -19,14 +20,28 @@ public class PacoteService {
         this.pacoteMapper = pacoteMapper;
     }
 
-    public List<PacoteDTO> buscarPacotes() {
+    @Override
+    public void salvar(PacoteDTO entidade) {
+
+    }
+
+    public List<PacoteDTO> listarTodos() {
         return pacoteRepository.findAll().stream()
                 .map(pacoteMapper::map)
                 .toList();
     }
-    public PacoteDTO buscarPacotePorId(Long id) {
+    public PacoteDTO buscarPorId(Long id) {
         PacoteModel pacoteEncontrado = pacoteRepository.findById(id).orElseThrow(() -> new PacoteException("Pacote Nao Encontrado"));
         return pacoteMapper.map(pacoteEncontrado);
     }
 
+    @Override
+    public void update(Long id, PacoteDTO entidade) {
+
+    }
+
+    @Override
+    public void excluir(Long id) {
+
+    }
 }
