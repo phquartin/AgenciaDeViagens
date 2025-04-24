@@ -1,0 +1,49 @@
+package com.agenciadeviagens.local.pedidos.service;
+
+import com.agenciadeviagens.global.interfaces.InterfaceService;
+import com.agenciadeviagens.local.clientes.dto.ClienteDTO;
+import com.agenciadeviagens.local.clientes.mapper.ClienteMapper;
+import com.agenciadeviagens.local.pedidos.dto.PedidoDTO;
+import com.agenciadeviagens.local.pedidos.mapper.PedidoMapper;
+import com.agenciadeviagens.local.pedidos.model.PedidoModel;
+import com.agenciadeviagens.local.pedidos.repository.PedidoRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class PedidoService implements InterfaceService<PedidoDTO> {
+
+    private final PedidoRepository pedidoRepository;
+    private final PedidoMapper pedidoMapper;
+    public PedidoService(PedidoRepository pedidoRepository, PedidoMapper pedidoMapper ) {
+        this.pedidoRepository = pedidoRepository;
+        this.pedidoMapper = pedidoMapper;
+    }
+
+    @Override
+    public void salvar(PedidoDTO entidade) {
+
+    }
+
+    @Override
+    public List<PedidoDTO> listarTodos() {
+        return List.of();
+    }
+
+    @Override
+    public PedidoDTO buscarPorId(Long id) {
+        return null;
+    }
+
+    @Override
+    public void update(Long id, PedidoDTO entidade) {
+        // ENTIDADE IMUTÁVEL!
+    }
+
+    @Override
+    public void excluir(Long id) {
+        // TODO: FUTURAMENTE ADICIONAR UM BOOLEAN PARA DEFINIR SUA ATIVACAO. (EVITANDO O DELETE)
+    }
+}

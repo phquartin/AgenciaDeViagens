@@ -3,6 +3,7 @@ package com.agenciadeviagens.local.pedidos.mapper;
 import com.agenciadeviagens.local.clientes.mapper.ClienteMapper;
 import com.agenciadeviagens.local.pacotes.mapper.PacoteMapper;
 import com.agenciadeviagens.local.pedidos.dto.PedidoDTO;
+import com.agenciadeviagens.local.pedidos.dto.PedidoPacoteDTO;
 import com.agenciadeviagens.local.pedidos.model.PedidoModel;
 import com.agenciadeviagens.local.servicos.mapper.ServicosMapper;
 import org.springframework.context.annotation.Lazy;
@@ -21,7 +22,7 @@ public class PedidoPacoteMapper {
         this.servicosMapper = servicosMapper;
     }
 
-    public PedidoModel map(PedidoDTO pedidoDTO) {
+    public PedidoModel map(PedidoPacoteDTO pedidoDTO) {
         PedidoModel pedido = new PedidoModel();
         pedido.setId(pedidoDTO.getId());
 
@@ -38,8 +39,8 @@ public class PedidoPacoteMapper {
         return pedido;
     }
 
-    public PedidoDTO map(PedidoModel pedidoModel) {
-        PedidoDTO pedidoDTO = new PedidoDTO();
+    public PedidoPacoteDTO map(PedidoModel pedidoModel) {
+        PedidoPacoteDTO pedidoDTO = new PedidoPacoteDTO();
         pedidoDTO.setId(pedidoModel.getId());
 
         // Convertendo Model -> DTO usando os outros mappers

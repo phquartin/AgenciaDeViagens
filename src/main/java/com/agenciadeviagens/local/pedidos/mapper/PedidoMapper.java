@@ -17,7 +17,7 @@ public class PedidoMapper {
     private final PacoteMapper pacoteMapper;
     private final ServicosMapper servicosMapper;
 
-    public PedidoMapper(@Lazy ClienteMapper clienteMapper, @Lazy PacoteMapper pacoteMapper, @Lazy ServicosMapper servicosMapper) {
+    public PedidoMapper(ClienteMapper clienteMapper, PacoteMapper pacoteMapper, ServicosMapper servicosMapper) {
         this.clienteMapper = clienteMapper;
         this.pacoteMapper = pacoteMapper;
         this.servicosMapper = servicosMapper;

@@ -2,6 +2,7 @@ package com.agenciadeviagens.local.pacotes.dto;
 
 import com.agenciadeviagens.local.destinos.dto.DestinoDTO;
 import com.agenciadeviagens.local.pacotes.model.PacoteType;
+import com.agenciadeviagens.local.pedidos.dto.PedidoPacoteDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,4 +20,5 @@ public class PacoteDTO {
     private List<DestinoDTO> destinos;
     private PacoteType tipo;
     private String descricao;
+    List<PedidoPacoteDTO> pedidos;
 }
