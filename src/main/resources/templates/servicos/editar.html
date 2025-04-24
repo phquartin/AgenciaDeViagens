@@ -8,7 +8,9 @@
 <body>
 <div class="container">
     <h1>Editar Serviço</h1>
-
+    <div th:if="${erro}" class="alert-error">
+        <p th:text="${erro}"></p>
+    </div>
     <form th:action="@{'/servico/ui/atualizar/' + ${servico.id}}" th:object="${servico}" method="post" class="form-card">
         <input type="hidden" name="_method" value="patch"/>
         <input type="hidden" th:field="*{id}"/>

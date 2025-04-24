@@ -8,7 +8,9 @@
 <body>
 <div class="container">
   <h1>Criar Novo Serviço</h1>
-
+  <div th:if="${erro}" class="alert-error">
+    <p th:text="${erro}"></p>
+  </div>
   <form th:action="@{/servico/ui/salvar}" th:object="${servico}" method="post" class="form-card">
     <div class="form-group">
       <label for="nome">Nome:</label>

@@ -4,9 +4,13 @@ import com.agenciadeviagens.global.exceptions.RecursoNaoEncontrado;
 import com.agenciadeviagens.global.interfaces.InterfaceService;
 import com.agenciadeviagens.local.servicos.dto.ServicosDTO;
 import com.agenciadeviagens.local.servicos.mapper.ServicosMapper;
+import com.agenciadeviagens.local.servicos.model.ServicosModel;
 import com.agenciadeviagens.local.servicos.repository.ServicosRepository;
+import com.agenciadeviagens.local.servicos.validation.ServicosValidation;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +26,9 @@ public class ServicosService implements InterfaceService<ServicosDTO> {
 
     @Override
     public void salvar(ServicosDTO entidade) {
-
+        ServicosValidation.validarCampos(entidade);
+        ServicosModel model = servicosMapper.map(entidade);
+        servicosRepository.save(model);
     }
 
     @Override
@@ -39,11 +45,22 @@ public class ServicosService implements InterfaceService<ServicosDTO> {
 
     @Override
     public void update(Long id, ServicosDTO entidade) {
+        ServicosDTO servicoExistente = buscarPorId(id);
 
+        if(!entidade.getNome().isBlank()) servicoExistente.setNome(entidade.getNome());
+        if(entidade.getPreco() != 0) servicoExistente.setPreco(entidade.getPreco());
+
+        salvar(servicoExistente);
     }
 
     @Override
     public void excluir(Long id) {
+        buscarPorId(id);
+        try {
+            servicosRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e){
+            throw new DataIntegrityViolationException("Pedidos dependem desse Servico");
+        }
 
     }
 }
