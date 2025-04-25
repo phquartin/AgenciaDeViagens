@@ -62,6 +62,10 @@ public class DestinoService implements InterfaceService<DestinoDTO> {
     @Override
     public void excluir(Long id) {
         buscarPorId(id);
-        destinoRepository.deleteById(id);
+        try {
+            destinoRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("Nao foi possivel excluir um destino, PACOTES DEPENDEM DELE");
+        }
     }
 }

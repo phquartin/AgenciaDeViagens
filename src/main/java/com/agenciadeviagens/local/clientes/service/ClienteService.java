@@ -62,7 +62,11 @@ public class ClienteService implements InterfaceService<ClienteDTO> {
 
     public void excluir(Long id) {
         buscarPorId(id);
-        clienteRepository.deleteById(id);
+        try {
+            clienteRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("Nao foi possivel excluir um cliente");
+        }
     }
 
 }
