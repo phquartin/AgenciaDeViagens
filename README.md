@@ -11,7 +11,7 @@ Este sistema permite o gerenciamento de clientes (nacionais e estrangeiros), pac
 ## Requisitos
 
 - **Java JDK 21** (obrigatório)
-- **Docker** e **Docker Compose**
+- **Docker** e **Docker Compose** (obrigatório) [Como instalar](https://www.youtube.com/watch?v=Lgh8JgcYFwM)
 - **Maven**
 
 ## Tecnologias
@@ -35,7 +35,7 @@ cd https://github.com/phquartin/AgenciaDeViagens.git
 
 ### 2. Subir o banco de dados com Docker Compose
 
-O projeto já inclui o arquivo `docker-compose.yml`. Para iniciar o banco MySQL
+O projeto já inclui o arquivo `compose.yml`. Para iniciar o banco MySQL
 
 Por causa da dependencia abaixo, ao rodar o Application, caso possua docker instalado na sua maquina o Banco de Dados sera gerado automaticamente
 ```bash
@@ -66,7 +66,7 @@ ports:
 ```properties
 spring.application.name=AgenciaDeViagens
 
-spring.jpa.hibernate.ddl-auto=create
+spring.jpa.hibernate.ddl-auto=create # create usado para testes
 spring.datasource.url=jdbc:mysql://localhost:3310/mydatabase
 spring.datasource.username=myuser
 spring.datasource.password=secret
@@ -85,7 +85,7 @@ spring.jpa.properties.hibernate.format_sql=true
 
 #### Ou na IDE:
 
-Execute a classe principal que contém a anotação `@SpringBootApplication`.
+Execute a classe principal que contém a anotação `@SpringBootApplication` (recomendo).
 
 ---
 
@@ -104,7 +104,7 @@ Execute a classe principal que contém a anotação `@SpringBootApplication`.
 - Um pacote só pode ser removido se não houver clientes associados.
 - Clientes estrangeiros devem informar o passaporte; nacionais, o CPF.
 - Um pacote precisa ter **preço** e **destino** obrigatoriamente.
-- Para ver os pedidos de um cliente ou pacote especifico voce deve clicar no botão **visualizar** apos selecionar pacotes, ou clientes no `index.html` que fica em **localhost:8080/**
+- !!!! Para ver os pedidos de um cliente ou pacote especifico voce deve clicar no botão **visualizar** apos selecionar pacotes, ou clientes no `index.html` que fica em **localhost:8080/**
 
 ---
 
