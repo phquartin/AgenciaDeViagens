@@ -117,6 +117,22 @@ Scripts para popular o banco de dados sao gerados automaticamente em: `src/main/
 
 ---
 
+## Contribuições
+
+Contribuições são bem-vindas!
+
+Se você quiser sugerir melhorias, corrigir bugs ou adicionar novas funcionalidades, sinta-se à vontade para abrir uma **pull request**.  
+Passo a passo:
+
+1. Faça um fork do repositório
+2. Crie uma branch (`git checkout -b minha-feature`)
+3. Faça suas alterações
+4. Faça o commit (`git commit -m 'Minha nova feature'`)
+5. Faça o push para a branch (`git push origin minha-feature`)
+6. Abra uma pull request
+
+---
+
 ## Licença
 
 Projeto acadêmico. Uso livre para fins de estudo e aprendizado.
