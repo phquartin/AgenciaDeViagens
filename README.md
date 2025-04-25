@@ -10,17 +10,20 @@ Este sistema permite o gerenciamento de clientes (nacionais e estrangeiros), pac
 
 ## Requisitos
 
-- **Java JDK 21** (obrigatório)
+- Recomendado usar alguma IDEA como `InteliJ` ou `eclipse`
+
+- **Java JDK 21 ou inferior** (Caso use 21+ pode dar problemas com o LomBok)
 - **Docker** e **Docker Compose** (obrigatório) [Como instalar](https://www.youtube.com/watch?v=Lgh8JgcYFwM)
 - **Maven**
 
-## Tecnologias
+## Tecnologias Usadas
 
 - Java 21
 - Spring Boot
 - MySQL
 - Docker e Docker Compose
 - JPA / Hibernate
+- Idea: InteliJ
 
 ---
 
