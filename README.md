@@ -32,8 +32,8 @@ Este sistema permite o gerenciamento de clientes (nacionais e estrangeiros), pac
 ### 1. Clonar o projeto
 
 ```bash
-git clone https://github.com/seu-usuario/https://github.com/phquartin/AgenciaDeViagens.git
-cd https://github.com/phquartin/AgenciaDeViagens.git
+git clone https://github.com/phquartin/AgenciaDeViagens.git
+cd AgenciaDeViagens
 ```
 
 ### 2. Subir o banco de dados com Docker Compose
@@ -53,15 +53,16 @@ Por causa da dependencia abaixo, ao rodar o Application, caso possua docker inst
 O banco será iniciado em `localhost:3310`, compose.yaml:
 ````
 services:
-mysql:
-image: 'mysql:8.1'
-environment:
-- 'MYSQL_DATABASE=mydatabase'
-- 'MYSQL_PASSWORD=secret'
-- 'MYSQL_ROOT_PASSWORD=verysecret'
-- 'MYSQL_USER=myuser'
-ports:
-- '3310:3306'
+  mysql:
+    image: 'mysql:8.1'
+    environment:
+      - 'MYSQL_DATABASE=mydatabase'
+      - 'MYSQL_PASSWORD=secret'
+      - 'MYSQL_ROOT_PASSWORD=verysecret'
+      - 'MYSQL_USER=myuser'
+    ports:
+      - '3310:3306'
+
 ````
 
 ### 3. Configurar o `application.properties` (se necessário)
