@@ -31,4 +31,10 @@ public class DestinoModel {
     @JsonIgnore
     private List<PacoteModel> pacotes;
 
+
+    // DATALOADER
+    public DestinoModel(String nome, PaisModel pais) {
+        this.nome = nome;
+        this.pais = pais;
+    }
 }

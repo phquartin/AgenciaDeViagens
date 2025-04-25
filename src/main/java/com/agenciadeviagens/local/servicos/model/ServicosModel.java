@@ -22,4 +22,10 @@ public class ServicosModel {
     @Column(nullable = false)
     private double preco;
 
+    // DATALOADER
+    public ServicosModel(String nome, double preco) {
+        this.nome = nome;
+        this.preco = preco;
+    }
+
 }

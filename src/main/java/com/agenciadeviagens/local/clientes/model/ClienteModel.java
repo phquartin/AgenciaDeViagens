@@ -38,4 +38,13 @@ public class ClienteModel {
     @OneToMany(mappedBy = "cliente")
     private List<PedidoModel> pedidos;
 
+
+    // DATALOADER
+    public ClienteModel(String nome, String telefone, String email, ClientType tipo, String documento) {
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+        this.tipo = tipo;
+        this.documento = documento;
+    }
 }

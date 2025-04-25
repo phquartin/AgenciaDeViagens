@@ -31,4 +31,10 @@ public class PaisModel {
     @JsonIgnore
     private List<DestinoModel> destino;
 
+    // Para o DataLoader
+    public PaisModel(String nome, Continente continente) {
+        this.nome = nome;
+        this.continente = continente;
+    }
+
 }
